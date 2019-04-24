@@ -221,8 +221,13 @@ app.get('/api/recipes', function (req, res) {
 
 app.get('/api/recipes/:dataId', function (req, res) {
   let object = datasource.find(x => x.id === req.params.dataId);
-  console.log(object);
-  res.json(object);
+
+  if (object) {
+    console.log(object);
+    res.json(object);
+  } else {
+    res.status(404).send('Recipe not found');
+  }
 })
 
 app.post('/api/recipes/add', function (req, res) {
